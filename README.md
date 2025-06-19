@@ -26,12 +26,17 @@ Este projeto foi desenvolvido durante as aulas de **Laboratório de Programaçã
 
 ## 🗂️ Estrutura de Arquivos
 
-├── main.c # Função principal e controle dos menus
-├── actions.c # Funções para criar, listar, atualizar e excluir produtos e clientes, além de realizar vendas
-├── utils.c # Funções utilitárias como validações e formatação de CPF
-├── structs.h # Definição das structs (Product, Client, Sale, SaledProducts)
-├── actions.h # Header das funções de ações
-├── utils.h # Header das funções utilitárias
+|── main.c # Função principal e controle dos menus
+
+|── actions.c # Funções para criar, listar, atualizar e excluir produtos e clientes, além de realizar vendas
+
+|── utils.c # Funções utilitárias como validações e formatação de CPF
+
+|── structs.h # Definição das structs (Product, Client, Sale, SaledProducts)
+
+|── actions.h # Header das funções de ações
+
+|── utils.h # Header das funções utilitárias
 
 ## 🛠️ Tecnologias Utilizadas
 
