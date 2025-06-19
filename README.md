@@ -30,9 +30,9 @@ Este projeto foi desenvolvido durante as aulas de **Laboratório de Programaçã
 
 |── actions.c Funções para criar, listar, atualizar e excluir produtos e clientes, além de realizar vendas
 
-|── utils.c Funções utilitárias como validações e formatação de CPF
+|── utils.c Funções utilitárias 
 
-|── structs.h Definição das structs (Product, Client, Sale, SaledProducts)
+|── structs.h Definição das structs 
 
 |── actions.h Header das funções de ações
 
