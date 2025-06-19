@@ -44,7 +44,6 @@ void makeSale(Sale sales[], int *size, Client clients[], int sizeClients, Produc
 
     int id_client, id_product, n_products, qtd;
 
-    // Limpa o array de produtos da venda antes de começar
     for (int i = 0; i < 10; i++) {
         sales[*size].saled_products_id[i] = 0;
     }
@@ -67,17 +66,14 @@ void makeSale(Sale sales[], int *size, Client clients[], int sizeClients, Produc
         printf("Digite a quantidade:\n");
         scanf("%d", &qtd);
 
-        // Cria o item vendido
         saledProducts[*sizeSaledProducts].id = *sizeSaledProducts + 1;
         saledProducts[*sizeSaledProducts].id_product = id_product;
         saledProducts[*sizeSaledProducts].qtd_products = qtd;
         saledProducts[*sizeSaledProducts].id_sale = *size + 1;
 
-        // Corrigido: buscar índice real do produto
         int indexProduct = getIndexProduct(products, id_product);
         saledProducts[*sizeSaledProducts].price = products[indexProduct].price;
 
-        // Salva o ID do produto vendido dentro da venda
         sales[*size].saled_products_id[n_products] = saledProducts[*sizeSaledProducts].id;
 
         (*sizeSaledProducts)++;
@@ -114,7 +110,6 @@ void showSales(Sale sales[], int size, Client clients[], Product products[], Sal
             int saledProductId = sales[i].saled_products_id[j];
             if (saledProductId <= 0) break;
 
-            // Procurar o SaledProduct correspondente
             for (int k = 0; k < sizeSaledProducts; k++) {
                 if (saledProducts[k].id == saledProductId) {
                     saledProductIndex = k;
