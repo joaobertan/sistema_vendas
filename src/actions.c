@@ -44,6 +44,11 @@ void makeSale(Sale sales[], int *size, Client clients[], int sizeClients, Produc
 
     int id_client, id_product, n_products, qtd;
 
+    // Limpa o array de produtos da venda antes de começar
+    for (int i = 0; i < 10; i++) {
+        sales[*size].saled_products_id[i] = 0;
+    }
+
     listClients(clients, sizeClients);
     printSingleLine();
     printf("Selecione um cliente:\n");
@@ -59,23 +64,27 @@ void makeSale(Sale sales[], int *size, Client clients[], int sizeClients, Produc
 
         if (id_product == 999) break;
 
-        printf("Digite a quantidade\n");
+        printf("Digite a quantidade:\n");
         scanf("%d", &qtd);
 
-        // Cria o item
+        // Cria o item vendido
         saledProducts[*sizeSaledProducts].id = *sizeSaledProducts + 1;
         saledProducts[*sizeSaledProducts].id_product = id_product;
         saledProducts[*sizeSaledProducts].qtd_products = qtd;
         saledProducts[*sizeSaledProducts].id_sale = *size + 1;
-        saledProducts[*sizeSaledProducts].price = products[id_product].price;
 
+        // Corrigido: buscar índice real do produto
+        int indexProduct = getIndexProduct(products, id_product);
+        saledProducts[*sizeSaledProducts].price = products[indexProduct].price;
+
+        // Salva o ID do produto vendido dentro da venda
         sales[*size].saled_products_id[n_products] = saledProducts[*sizeSaledProducts].id;
 
         (*sizeSaledProducts)++;
-
         n_products++;
 
         if (n_products >= 10) break;
+
     } while (id_product != 999);
 
     sales[*size].id_cliente = id_client;
@@ -85,25 +94,53 @@ void makeSale(Sale sales[], int *size, Client clients[], int sizeClients, Produc
     printf("Venda cadastrada com sucesso!\n");
 }
 
-void showSales(Sale sales[], int size, Client clients[], Product products[]) {
-    int clientIndex, productIndex;
+void showSales(Sale sales[], int size, Client clients[], Product products[], SaledProducts saledProducts[], int sizeSaledProducts) {
+    int clientIndex, saledProductIndex, productIndex;
+    float total;
 
-	if (warningEmpty("Nenhuma venda cadastrada ainda.", size)) return;
+    if (warningEmpty("Nenhuma venda cadastrada ainda.", size)) return;
 
-	printSingleLine();
-	for (int i = 0; i < size; i++) {
+    printSingleLine();
+    for (int i = 0; i < size; i++) {
         printf("Venda código %d\n", sales[i].id);
+
         clientIndex = getIndexClient(clients, sales[i].id_cliente);
         printf("Cliente: %d - %s\n", sales[i].id_cliente, clients[clientIndex].name);
 
         printf("Produtos:\n");
-        for (int j = 0; j < 10; j++){
-            if (!(sales[i].saled_products_id[j] > 0)) break;
-            productIndex = getIndexProduct(products, sales[i].saled_products_id[j]);
-            printf("%d - %s\n", sales[i].saled_products_id[j], products[productIndex].descr);
+        total = 0;
+
+        for (int j = 0; j < 10; j++) {
+            int saledProductId = sales[i].saled_products_id[j];
+            if (saledProductId <= 0) break;
+
+            // Procurar o SaledProduct correspondente
+            for (int k = 0; k < sizeSaledProducts; k++) {
+                if (saledProducts[k].id == saledProductId) {
+                    saledProductIndex = k;
+
+                    productIndex = getIndexProduct(products, saledProducts[saledProductIndex].id_product);
+                    float subtotal = saledProducts[saledProductIndex].qtd_products * saledProducts[saledProductIndex].price;
+
+                    printf("%d - %s - Qtd: %d - Preço Unit: R$%.2f - Subtotal: R$%.2f\n",
+                           saledProducts[saledProductIndex].id,
+                           products[productIndex].descr,
+                           saledProducts[saledProductIndex].qtd_products,
+                           saledProducts[saledProductIndex].price,
+                           subtotal
+                    );
+
+                    total += subtotal;
+                    break;
+                }
+            }
         }
-	}
+
+        printf("Total da venda: R$%.2f\n", total);
+        printSingleLine();
+    }
 }
+
 
 void listProducts(Product products[], int size) {
     if (warningEmpty("Nenhum produto cadastrado ainda.", size)) return;

@@ -6,7 +6,7 @@
 void createProduct(Product products[], int *size);
 void createClient(Client clients[], int *size);
 void makeSale(Sale sales[], int *size, Client clients[], int sizeClients, Product products[], int sizeProducts, SaledProducts saledProducts[], int *sizeSaledProducts);
-void showSales(Sale sales[], int size, Client clients[], Product products[]);
+void showSales(Sale sales[], int size, Client clients[], Product products[], SaledProducts saledProducts[], int sizeSaledProducts);
 void listProducts(Product products[], int size);
 void listClients(Client clients[], int size);
 void deleteProduct(Product products[], int *size);

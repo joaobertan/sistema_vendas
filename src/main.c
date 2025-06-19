@@ -88,7 +88,7 @@ int main() {
                             makeSale(sales, &sizeSales, clients, sizeClients, products, sizeProducts, saledProducts, &sizeSaledProducts);
                             break;
                         case 2:
-                            showSales(sales, sizeSales, clients, products);
+                            showSales(sales, sizeSales, clients, products, saledProducts, sizeSaledProducts);
                             break;
                     }
                 } while (optVendas != 0);
