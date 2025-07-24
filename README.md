@@ -1,6 +1,6 @@
-# Sistema de Vendas (Projeto de Laboratório de Programação)
+# Sistema de Vendas 
 
-Este projeto foi desenvolvido durante as aulas de **Laboratório de Programação** na universidade. Trata-se de um sistema simples de vendas escrito em **linguagem C**, com gerenciamento de **Produtos**, **Clientes** e **Vendas**, utilizando **vetores fixos**, **structs** e **menus interativos no terminal**.
+Este projeto foi desenvolvido com o objetivo de testar a linguagem c. Trata-se de um sistema simples de vendas escrito em **linguagem C**, com gerenciamento de **Produtos**, **Clientes** e **Vendas**, utilizando **vetores fixos**, **structs** e **menus interativos no terminal**.
 
 ---
 
